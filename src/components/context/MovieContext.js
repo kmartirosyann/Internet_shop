@@ -16,6 +16,7 @@ const initialState = {
   cartItems: [],
   totalCount: 0,
   showRightBlock: false,
+  count:0,
 };
 
 const reducer = (state, action) => {
@@ -36,12 +37,12 @@ const reducer = (state, action) => {
         ...state.cartItems,
         [action.payload.id]: !state.cartItems[action.payload.id]
           ? [action.payload]
-          : [...state.cartItems[action.payload.id], action.payload],
+          : [...state.cartItems[action.payload.id],action.payload ],
       };
-
+        
       const allItems = [].concat.apply([], Object.values(newItem));
       const itemprice = allItems.reduce((sum, obj) => obj.item.price + sum, 0);
-
+      
       return {
         ...state,
         cartItems: newItem,
@@ -49,11 +50,11 @@ const reducer = (state, action) => {
         itemprice: itemprice,
       };
     },
-    [REMOVE_FROM_CART]: () => {
-      const cartItems = { ...state.cartItems };
-      cartItems[action.payload.item.id] &&
-        cartItems[action.payload.item.id].pop();
-        console.log(cartItems)
+    [REMOVE_FROM_CART]:  () => {
+      const itemLengt = state.cartItems[action.payload.id].length-1
+      const cartItems = { ...state.cartItems,
+        [action.payload.id]:state.cartItems[action.payload.id] && state.cartItems[action.payload.id].slice(0,itemLengt)};
+     
       return {
         ...state,
         cartItems,
@@ -68,6 +69,7 @@ const reducer = (state, action) => {
     },
     [TOGGLE_RIGHT_BLOCK]: () => ({ ...state, showRightBlock: action.payload }),
   };
+  console.log(state)
   return actions[action.type]();
 };
 

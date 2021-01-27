@@ -17,7 +17,7 @@ function Home() {
   const decrement = (item) => {
     dispatch({
       type: "REMOVE_FROM_CART",
-      payload: { item },
+      payload: {id:item.id, item },
     });
   };
   return (
@@ -30,12 +30,13 @@ function Home() {
           <div className="col s12 m4 l8">
             {state.data &&
               state.data.map((item,index) => {
+               
                 return (
                   <Zoom key={item + item.id}>
                     <div className="col s12 m3 l3">
                       <div className="card">
                         <div className="card-image">
-                          <img src={item.image} alt="" height="220vh" />
+                          <img src={item.image} alt="" height="300vh" />
                           <div className="row">
                             <div className="col s12 m6 l6">
                               <div className="card-content padText">
@@ -63,7 +64,7 @@ function Home() {
                                     -{" "}
                                   </div>
                                 </div>
-                                 <div className=" grey lighten-4"> total : {state.cartItems[item.id] && state.cartItems[item.id].length } </div>
+                                 <div className=" grey lighten-4"> total : { state.cartItems[item.id] && state.cartItems[item.id].length } </div>
                               </div>
                             </div>
                           </div>

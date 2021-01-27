@@ -4,9 +4,7 @@ import {  Link } from "react-router-dom";
 
 function Header() {
   const { state, dispatch } = React.useContext(MovieContext);
-  const divclass = state.totalCount === 0 || state.totalCount === undefined ? "":'divclass'
-console.log(state.totalCount)
-  
+  const divclass = state.totalCount === 0 || state.totalCount === undefined ? "":'divclass'  
   return (
     <div>
       <nav className="grey darken-1">
